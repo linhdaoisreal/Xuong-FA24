@@ -62,6 +62,27 @@
                 </div>
             </div>
 
+            <div class="mb-3 row">
+                <label for="name" class="col-4 col-form-label">passport_number</label>
+                <div class="col-8">
+                    <input value="{{ $student->passport->passport_number ?? '' }}" type="number" class="form-control" name="passport_number" id="passport_number" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="email" class="col-4 col-form-label">issued_date</label>
+                <div class="col-8">
+                    <input value="{{ $student->passport->issued_date ?? '' }}" type="date" class="form-control" name="issued_date" id="issued_date" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="email" class="col-4 col-form-label">expiry_date</label>
+                <div class="col-8">
+                    <input value="{{ $student->passport->expiry_date ?? '' }}" type="date" class="form-control" name="expiry_date" id="expiry_date" />
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-primary">
                 Submit
             </button>

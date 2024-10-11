@@ -244,5 +244,9 @@ Route::post('students/storePassport', [StudentController::class, 'storePassport'
 
 Route::get('students/{student}/addSubjects', [StudentController::class, 'addSubjects'])
     ->name('students.addSubjects');
-Route::post('students/storeSubjects', [StudentController::class, 'storeSubjects'])
+Route::post('students/{student}/storeSubjects', [StudentController::class, 'storeSubjects'])
     ->name('students.storeSubjects');
+Route::get('students/{student}/unsubmitSubjects', [StudentController::class, 'unsubmitSubjects'])
+    ->name('students.unsubmitSubjects');
+Route::post('students/{student}/confirmUnsubmitSubjects', [StudentController::class, 'confirmUnsubmitSubjects'])
+    ->name('students.confirmUnsubmitSubjects');

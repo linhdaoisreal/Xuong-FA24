@@ -29,6 +29,7 @@
                                 <a class="nav-link active" href="/" aria-current="page">Welecome</a>
                                 <a class="nav-link" href="{{route('customers.index')}}">Customer</a>
                                 <a class="nav-link" href="{{route('employees.index')}}">Employee</a>
+                                <a class="nav-link" href="{{route('students.index')}}">Student</a>
                                 <a class="nav-link" href="18-check">18-Check</a>
                             </nav>
                         </ul>

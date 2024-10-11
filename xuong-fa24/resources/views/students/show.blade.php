@@ -26,13 +26,42 @@
                                 @break
 
                                 @case('passport')
-                                    <p>{{ $student->passport ? $student->passport->passport_number : 'Không có số hộ chiếu' }}</p>
+                                    @if ($student->passport)
+                                        <p class="fw-bold">Passport Number: <span class="fw-normal">{{$student->passport->passport_number}}</span></p>
+                                        <p class="fw-bold">Issued Date: <span class="fw-normal">{{$student->passport->issued_date}}</span></p>
+                                        <p class="fw-bold">Expiry Date: <span class="fw-normal">{{$student->passport->expiry_date}}</span></p>
+                                    @else
+                                        <p>Không có số hộ chiếu</p>
+                                        <a class="btn btn-info" href="{{ route('students.addPassport', $student ) }}">Add passport</a>
+                                    @endif
                                 @break
 
                                 @case('subjects')
-                                    <p>{{ $student->subjects ?? 'Không có Môn nào được đăng kí' }}</p>
+                                    <h4>Danh sách môn học</h4>
+                                    @if ($student->subjects != '')
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Subject Name</th>
+                                                    <th>Credit</th>
+                                                    <th>Register Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($student->subjects as $subject)  
+                                                <tr>  
+                                                    <td>{{ $subject->name }}</td>
+                                                    <td>{{ $subject->credits }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($subject->created_at)->format('d/m/Y') }}</td> 
+                                                </tr>  
+                                                @endforeach 
+                                            </tbody>
+                                             
+                                        </table>
+                                    @endif
 
-                                    <a href="">Register for New Subjects</a>
+                                    <a class="btn btn-info" href="{{ route('students.addSubjects', $student ) }}">Register for New Subjects</a>
+                                    <a class="btn btn-danger" href="{{ route('students.unsubmitSubjects', $student ) }}">Unsubmit Subjects</a>
                                 @break
 
                                 @case('created_at')
