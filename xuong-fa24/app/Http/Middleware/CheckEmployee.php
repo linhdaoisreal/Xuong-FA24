@@ -16,8 +16,8 @@ class CheckEmployee
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {  
-            $user = Auth::user();  
+        if (session('user')) {  
+            $user = session('user');  
             // dd($user); // Kiểm tra xem người dùng có được lấy chính xác không  
             
             if ($user->role == 0 || $user->role == 1) {  

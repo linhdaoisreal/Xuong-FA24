@@ -9,7 +9,7 @@
 
         <h1>THÊM MỚI KHACH HÀNG</h1>
 
-        @if (session()->has('success') && !session()->get())
+        @if (session()->has('success') && session()->get())
             <div class="alert alert-primary" role="alert">
                 {{ session()->get('error') }}
             </div>

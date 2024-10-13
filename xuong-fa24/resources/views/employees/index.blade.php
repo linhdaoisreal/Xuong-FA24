@@ -7,7 +7,7 @@
 @section('content')
     <h1>Danh sách Nhân viên</h1>
 
-    @if (session()->has('success') && !session()->get('success'))
+    @if (session()->has('success') && session()->get('success'))
         <div class="alert alert-primary" role="alert">
             {{ session()->get('error') }}
         </div>

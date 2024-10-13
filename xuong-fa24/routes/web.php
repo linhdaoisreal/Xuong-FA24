@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentController;
 use App\Models\Comment;
 use App\Models\Employee;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // dd(session('user'));
     return view('welcome');
 })->name('welecome');
 
@@ -156,7 +158,7 @@ Route::delete('employees/{employee}/forceDestroy', [EmployeeController::class, '
     ->name('employees.forceDestroy');
 
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -250,3 +252,35 @@ Route::get('students/{student}/unsubmitSubjects', [StudentController::class, 'un
     ->name('students.unsubmitSubjects');
 Route::post('students/{student}/confirmUnsubmitSubjects', [StudentController::class, 'confirmUnsubmitSubjects'])
     ->name('students.confirmUnsubmitSubjects');
+
+
+Route::get('/login', function () {
+    return view('login.login');
+})->name('login');
+
+Route::post('/loginConfirm', [LoginController::class, 'login'])->name('loginConfirm');
+
+Route::get('/register', function () {
+    return view('login.register');
+})->name('register');
+
+Route::post('/registerConfirm', [LoginController::class, 'register'])->name('registerConfirm');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+// Hiển thị form yêu cầu nhập email
+Route::get('/forgot-password', function () {
+    return view('login.forgot');
+})->middleware('guest')->name('password.forgot');
+
+// Xử lý yêu cầu đặt lại mật khẩu (gửi email chứa link đổi mật khẩu)
+Route::post('/forgot-password', [LoginController::class, 'sendMail'])->middleware('guest')->name('password.email');
+
+// Hiển thị form nhập mật khẩu mới
+Route::get('/reset-password/{token}', function ($token) {
+    return view('login.resetpass', ['token' => $token, 'email' => request('email')]);
+})->middleware('guest')->name('password.reset');
+
+// Xử lý việc đặt lại mật khẩu sau khi người dùng nhập mật khẩu mới
+Route::post('/reset-password', [LoginController::class, 'resetPassword'])->middleware('guest')->name('password.update');

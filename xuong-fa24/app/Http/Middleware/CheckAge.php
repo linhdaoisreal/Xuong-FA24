@@ -15,12 +15,16 @@ class CheckAge
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $age = $request->get('age', null);
+        if (session('user')) {
+            $age = $request->get('age', null);
 
-        if($age > 18){
-            return $next($request);
+            if ($age > 18) {
+                return $next($request);
+            }
+
+            abort(403);
+        } else {
+            return redirect()->route('login');
         }
-
-        abort(403);
     }
 }
