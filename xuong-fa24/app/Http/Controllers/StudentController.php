@@ -13,7 +13,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $data = Student::latest('id')->with(['classroom', 'passport'])->paginate(10);
+        $data = Student::latest('id')->with(['classroom', 'passport'])->paginate(5);
 
         return view('students.index', compact('data'));
     }

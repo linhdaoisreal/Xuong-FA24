@@ -1,11 +1,11 @@
 @extends('master')
 
 @section('tittle')
-    Show Nhân viên {{ $student->name }}
+    Show Sinh viên {{ $student->name }}
 @endsection
 
 @section('content')
-    <h1>Show Nhân viên {{ $student->name }}</h1>
+    <h1>Show Sinh viên {{ $student->name }}</h1>
 
     <div class="table-responsive">
         <table class="table table-primary">
